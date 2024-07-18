@@ -4,36 +4,54 @@ import Card from './components/Card'
 import './App.css'
 
 function App() {
-
-  const [image, setImage] = useState({
-    title: 'bam',
-    imageUrl: ''
-  })
+  const API_KEY = 'live_F8shDaeIQ22M7Pdeg5C4lRawfLTwbc9iPMA5xY5Tisd6C830T77lGHDeBKDr3gLR'
 
   const [allImages, setAllImages] = useState([])
   
   useEffect(() => {
-    fetch("https://api.thecatapi.com/v1/images/search?limit=10")
+    fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=beng&limit=10&api_key=${API_KEY}`)
         .then(res => res.json())
         .then(data => setAllImages(data))
-      }, [])
+  }, [])
       
-      
-    console.log('oi',allImages)
-    const imageList = allImages.map((img) => {
-      return (
-        <Card 
-          key={img.id}
-          title={img.id}
-          imageUrl={img.url}
-        />
-      )
+  function shuffleCards() {
+    console.log('shuffle ran')
+    console.log(allImages)
+    let newArray = allImages;
+    let currentIndex = newArray.length;
+
+    // While there remain elements to shuffle...
+    while (currentIndex !== 0) {
+  
+      // Pick a remaining element...
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [newArray[currentIndex], newArray[randomIndex]] = [
+        newArray[randomIndex], newArray[currentIndex]];
+    }
+
+    setAllImages((prevImages) => {
+      return [...prevImages]
     })
+  }
+
+  console.log('oi',allImages)
+  const imageList = allImages.map((img) => {
+    return (
+      <Card 
+        key={img.id}
+        title={img.id}
+        imageUrl={img.url}
+        onClick={shuffleCards}
+      />
+    )
+  })
   
   return (
     <>
-      <p>hello</p>
-      {imageList}
+      <div className="cards-container">{imageList}</div>
     </>
   )
 }

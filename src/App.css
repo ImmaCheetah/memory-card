@@ -127,3 +127,7 @@ table {
 * {
   box-sizing: border-box;
 }
+
+.cards-container {
+  display: flex;
+}
