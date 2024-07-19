@@ -1,12 +1,12 @@
 import { useState } from "react"
 import "../styles/card.css"
 
-export default function Card({title, imageUrl, shuffleCards,toggleClicked}) {
+export default function Card({title, imageUrl, shuffleCards}) {
 
     const [beenClicked, setBeenClicked] = useState(false)
 
     function toggleClicked() {
-        setBeenClicked(!beenClicked)
+        setBeenClicked(true)
         console.log(beenClicked)
     }
 
@@ -14,7 +14,14 @@ export default function Card({title, imageUrl, shuffleCards,toggleClicked}) {
         <div className="card">
             <p>{title}</p>
             <h3>{beenClicked && "Clicked"}</h3>
-            <img src={imageUrl} alt="" onClick={shuffleCards} onMouseEnter={toggleClicked}/>
+            <img 
+                src={imageUrl} 
+                alt="" 
+                onClick={()=> { 
+                    shuffleCards()
+                    toggleClicked()
+                }} 
+            />
         </div>
     )
 }
