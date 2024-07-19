@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Card from './components/Card'
+import { v4 as uuidv4 } from "uuid";
 
 import './App.css'
 
@@ -7,6 +8,7 @@ function App() {
   const API_KEY = 'live_F8shDaeIQ22M7Pdeg5C4lRawfLTwbc9iPMA5xY5Tisd6C830T77lGHDeBKDr3gLR'
 
   const [allImages, setAllImages] = useState([])
+  const [clickedArray, setClickedArray] = useState([])
   
   useEffect(() => {
     fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=beng&limit=10&api_key=${API_KEY}`)
@@ -38,23 +40,48 @@ function App() {
     })
   }
 
-  
+  function handleClick(id) {
+    setClickedArray(
+      clickedArray.map((click) => {
+        if (click.id === id) {
+          return {...click, beenClicked: true}
+        } else {
+          return click
+        }
+      })
+    )
+    
+    console.log('clicked', clickedArray)
+
+    // setClickedArray(prevClick => {
+    //   return [
+    //     ...prevClick, 
+    //     {
+    //       id: uuidv4(),
+    //       beenClicked: true
+    //     }
+    //   ]
+    // })
+  }
 
   console.log('oi',allImages)
-  const imageList = allImages.map((img) => {
+  const cardList = allImages.map((img) => {
+    
     return (
       <Card 
         key={img.id}
         title={img.id}
         imageUrl={img.url}
         shuffleCards={shuffleCards}
+        onClick={handleClick}
+        
       />
     )
   })
   
   return (
     <>
-      <div className="cards-container">{imageList}</div>
+      <div className="cards-container">{cardList}</div>
     </>
   )
 }
