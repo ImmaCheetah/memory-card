@@ -32,10 +32,13 @@ function App() {
         newArray[randomIndex], newArray[currentIndex]];
     }
 
+    // Triggers a re-render to update cards on screen
     setAllImages((prevImages) => {
       return [...prevImages]
     })
   }
+
+  
 
   console.log('oi',allImages)
   const imageList = allImages.map((img) => {
@@ -44,7 +47,7 @@ function App() {
         key={img.id}
         title={img.id}
         imageUrl={img.url}
-        onClick={shuffleCards}
+        shuffleCards={shuffleCards}
       />
     )
   })
