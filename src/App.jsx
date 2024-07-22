@@ -86,6 +86,8 @@ function App() {
       <h1 className='header'>Cat Memory Game</h1>
       <Scoreboard score={clickedCount} highScore={highScore}/>
       <div className="cards-container">{cardList}</div>
+      <h4 className='win-text'>{clickedArray.length === allImages.length && 'Well Done!'}</h4>
+      
     </div>
   )
 }

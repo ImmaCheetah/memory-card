@@ -5,7 +5,7 @@ export default function Scoreboard({score, highScore}) {
         <div className="scoreboard">
             <h1 className="current score">Current Score: {score}</h1>
             <h2 className="high score">High Score: {highScore}</h2>
-            <p className="guide">Click all images without clicking the same image</p>
+            <p className="guide">Click all images without clicking the same image more than once</p>
         </div>
     )
 }

@@ -1,14 +1,12 @@
-import { useState } from "react"
 import "../styles/card.css"
 
-export default function Card({imageUrl, beenClicked, onClick}) {
+export default function Card({imageUrl, onClick}) {
 
     return (
         <div className="card" onClick={onClick}>
-            {/* <h3>{beenClicked && "Clicked"}</h3> */}
             <img 
                 src={imageUrl} 
-                alt="" 
+                alt="Bengal cat" 
                 onClick={onClick}
             />
         </div>

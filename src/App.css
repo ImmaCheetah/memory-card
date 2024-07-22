@@ -157,3 +157,9 @@ body {
   flex-wrap: wrap;
   gap: 2rem;
 }
+
+.win-text {
+  font-size: 2rem;
+  color: white;
+  padding-top: 1rem;
+}
