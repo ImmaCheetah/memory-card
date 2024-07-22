@@ -1,6 +1,6 @@
 # Project Name
 
-> [Live Website](https://immacheetah.github.io/project-name/)
+> [Live Website](https://cheet-memory-card.netlify.app)
 
 ## Preview
 
@@ -12,11 +12,10 @@
 ## Getting Started
 
 ```
-$ git clone git@github.com:immacheetah/project-name.git
-$ cd project-name
+$ git clone git@github.com:immacheetah/memory-card.git
+$ cd memory-card
 $ npm install
 $ npm run dev
 ```
 
 ## Learning Outcomes
-
