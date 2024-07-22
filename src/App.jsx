@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import Card from './components/Card'
 import { v4 as uuidv4 } from "uuid";
-
+import apiKey from '../config'
 import './App.css'
 
 function App() {
-  const API_KEY = 'live_F8shDaeIQ22M7Pdeg5C4lRawfLTwbc9iPMA5xY5Tisd6C830T77lGHDeBKDr3gLR'
+  const API_KEY = apiKey()
 
   const [allImages, setAllImages] = useState([])
-  const [clickedArray, setClickedArray] = useState([])
+  const [clickedArray, setClickedArray] = useState(fillArray())
   
   useEffect(() => {
     fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=beng&limit=10&api_key=${API_KEY}`)
@@ -40,9 +40,27 @@ function App() {
     })
   }
 
-  function handleClick(id) {
+  function fillArray() {
+    let filledArray = []
+
+    for (let i = 0; i < 10; i++) {
+      filledArray.push({
+        id: uuidv4(),
+        beenClicked: false
+      })
+    }
+
+    return filledArray
+  }
+
+  function handleClick(e, id) {
+    // check if clicked array contains 
+    console.log(e.target.id)
+
     setClickedArray(
       clickedArray.map((click) => {
+        console.log('Single click value', click)
+        console.log(`This is clickID: ${click.id}, this is id: ${id}`)
         if (click.id === id) {
           return {...click, beenClicked: true}
         } else {
@@ -52,29 +70,20 @@ function App() {
     )
     
     console.log('clicked', clickedArray)
-
-    // setClickedArray(prevClick => {
-    //   return [
-    //     ...prevClick, 
-    //     {
-    //       id: uuidv4(),
-    //       beenClicked: true
-    //     }
-    //   ]
-    // })
   }
 
-  console.log('oi',allImages)
+  // console.log('oi',allImages)
   const cardList = allImages.map((img) => {
     
     return (
       <Card 
         key={img.id}
+        id={2}
         title={img.id}
         imageUrl={img.url}
         shuffleCards={shuffleCards}
-        onClick={handleClick}
-        
+        onClick={(e) => {
+          handleClick(e, e.target.id) }}
       />
     )
   })

@@ -3,8 +3,6 @@ import "../styles/card.css"
 
 export default function Card({title, imageUrl, shuffleCards, beenClicked, onClick}) {
 
-    
-
     function toggleClicked() {
         // setBeenClicked(true)
         // console.log(beenClicked)
