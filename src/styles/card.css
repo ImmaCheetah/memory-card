@@ -1,9 +1,16 @@
 .card {
-    border: solid 1px black;
-    width: 100px;
-    height: 100px;
+    border: solid 3px rgb(231, 119, 33);
+    width: 200px;
+    height: 200px;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 16px -6px rgba(0,0,0,0.77);
+    cursor: pointer;
 }
 
 img {
-    width: 100px;
+    /* width: 250px; */
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0.3rem;
 }

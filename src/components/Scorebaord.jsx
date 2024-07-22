@@ -1,9 +1,11 @@
+import "../styles/scoreboard.css"
 
 export default function Scoreboard({score, highScore}) {
     return (
-        <>
-            <h4>Current Score: {score}</h4>
-            <h4>High Score: {highScore}</h4>
-        </>
+        <div className="scoreboard">
+            <h1 className="current score">Current Score: {score}</h1>
+            <h2 className="high score">High Score: {highScore}</h2>
+            <p className="guide">Click all images without clicking the same image</p>
+        </div>
     )
 }

@@ -1,0 +1,14 @@
+.scoreboard {
+    padding: 2rem;
+    color: white;
+    text-align: center;
+}
+
+.score {
+    font-size: 1.8rem;
+}
+
+.guide {
+    padding-top: 1rem;
+    font-size: 1.1rem;
+}

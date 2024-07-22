@@ -57,7 +57,6 @@ function App() {
 
     if (clickedArray.includes(id)) {
       setClickedArray([])
-      // setHighScore(0)
     } else {
       setClickedArray([
         ...clickedArray,
@@ -83,10 +82,11 @@ function App() {
   })
   
   return (
-    <>
+    <div className='app-container'>
+      <h1 className='header'>Cat Memory Game</h1>
       <Scoreboard score={clickedCount} highScore={highScore}/>
       <div className="cards-container">{cardList}</div>
-    </>
+    </div>
   )
 }
 

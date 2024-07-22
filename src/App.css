@@ -128,6 +128,32 @@ table {
   box-sizing: border-box;
 }
 
-.cards-container {
+body {
+  font-family: "Dosis", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: rgb(180, 145, 100);
+}
+
+.header {
+  font-size: 3rem;
+  font-weight: bold;
+  padding-top: 1rem;
+  color: white;
+}
+
+.app-container {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cards-container {
+  width: 60vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
