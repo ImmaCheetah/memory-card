@@ -9,6 +9,7 @@ function App() {
 
   const [allImages, setAllImages] = useState([])
   const [clickedArray, setClickedArray] = useState([])
+  const [highScore, setHighScore] = useState(0)
 
   const clickedCount = clickedArray.length;
   
@@ -43,15 +44,26 @@ function App() {
     })
   }
 
+  function storeHighScore() {
+    
+    if (clickedCount < highScore) {
+      return
+    } else {
+      setHighScore(highScore + 1)
+    }
+  }
+
   function handleClick(id) {
 
     if (clickedArray.includes(id)) {
       setClickedArray([])
+      // setHighScore(0)
     } else {
       setClickedArray([
         ...clickedArray,
         id
       ])
+      storeHighScore()
     }
     shuffleCards()
     console.log('clicked', clickedArray)
@@ -62,7 +74,6 @@ function App() {
     return (
       <Card 
         key={img.id}
-        id={img.id}
         beenClicked={clickedArray.includes(img.id)}
         imageUrl={img.url}
         shuffleCards={shuffleCards}
@@ -73,7 +84,7 @@ function App() {
   
   return (
     <>
-      <Scoreboard score={clickedCount}/>
+      <Scoreboard score={clickedCount} highScore={highScore}/>
       <div className="cards-container">{cardList}</div>
     </>
   )
