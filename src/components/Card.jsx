@@ -1,21 +1,17 @@
 import { useState } from "react"
 import "../styles/card.css"
 
-export default function Card({title, imageUrl, shuffleCards, beenClicked, onClick}) {
-
-    function toggleClicked() {
-        // setBeenClicked(true)
-        // console.log(beenClicked)
-    }
+export default function Card({title, imageUrl, shuffleCards, beenClicked, onClick, id}) {
 
     return (
-        <div className="card">
+        <div className="card" >
             <p>{title}</p>
-            {/* <h3>{beenClicked.length && "Clicked"}</h3> */}
+            <h3>{beenClicked && "Clicked"}</h3>
             <img 
                 src={imageUrl} 
                 alt="" 
-                onClick={onClick} 
+                onClick={onClick}
+                id={id} 
             />
         </div>
     )

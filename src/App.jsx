@@ -8,7 +8,9 @@ function App() {
   const API_KEY = apiKey()
 
   const [allImages, setAllImages] = useState([])
-  const [clickedArray, setClickedArray] = useState(fillArray())
+  const [clickedArray, setClickedArray] = useState([])
+
+  const clickedCount = clickedArray.length;
   
   useEffect(() => {
     fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=beng&limit=10&api_key=${API_KEY}`)
@@ -16,6 +18,7 @@ function App() {
         .then(data => setAllImages(data))
   }, [])
       
+
   function shuffleCards() {
     console.log('shuffle ran')
     console.log(allImages)
@@ -40,35 +43,19 @@ function App() {
     })
   }
 
-  function fillArray() {
-    let filledArray = []
+  function handleClick(id) {
 
-    for (let i = 0; i < 10; i++) {
-      filledArray.push({
-        id: uuidv4(),
-        beenClicked: false
-      })
+    if (clickedArray.includes(id)) {
+      setClickedArray(clickedArray.filter(click => {
+        return click
+      }))
+    } else {
+      setClickedArray([
+        ...clickedArray,
+        id
+      ])
     }
-
-    return filledArray
-  }
-
-  function handleClick(e, id) {
-    // check if clicked array contains 
-    console.log(e.target.id)
-
-    setClickedArray(
-      clickedArray.map((click) => {
-        console.log('Single click value', click)
-        console.log(`This is clickID: ${click.id}, this is id: ${id}`)
-        if (click.id === id) {
-          return {...click, beenClicked: true}
-        } else {
-          return click
-        }
-      })
-    )
-    
+    shuffleCards()
     console.log('clicked', clickedArray)
   }
 
@@ -78,12 +65,11 @@ function App() {
     return (
       <Card 
         key={img.id}
-        id={2}
-        title={img.id}
+        id={img.id}
+        beenClicked={clickedArray.includes(img.id)}
         imageUrl={img.url}
         shuffleCards={shuffleCards}
-        onClick={(e) => {
-          handleClick(e, e.target.id) }}
+        onClick={() => handleClick(img.id)}
       />
     )
   })
@@ -91,6 +77,7 @@ function App() {
   return (
     <>
       <div className="cards-container">{cardList}</div>
+      <h4># Clicked - {clickedCount}</h4>
     </>
   )
 }
