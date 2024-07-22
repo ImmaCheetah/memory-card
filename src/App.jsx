@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Card from './components/Card'
-import { v4 as uuidv4 } from "uuid";
+import Scoreboard from './components/Scorebaord'
 import apiKey from '../config'
 import './App.css'
 
@@ -46,9 +46,7 @@ function App() {
   function handleClick(id) {
 
     if (clickedArray.includes(id)) {
-      setClickedArray(clickedArray.filter(click => {
-        return click
-      }))
+      setClickedArray([])
     } else {
       setClickedArray([
         ...clickedArray,
@@ -59,7 +57,6 @@ function App() {
     console.log('clicked', clickedArray)
   }
 
-  // console.log('oi',allImages)
   const cardList = allImages.map((img) => {
     
     return (
@@ -76,8 +73,8 @@ function App() {
   
   return (
     <>
+      <Scoreboard score={clickedCount}/>
       <div className="cards-container">{cardList}</div>
-      <h4># Clicked - {clickedCount}</h4>
     </>
   )
 }
