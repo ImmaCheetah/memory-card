@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Card from './components/Card'
-import Scoreboard from './components/Scorebaord'
+import Scoreboard from './components/Scoreboard'
 import apiKey from '../config'
 import './App.css'
 
@@ -13,27 +13,26 @@ function App() {
 
   const clickedCount = clickedArray.length;
   
+  // Fetch images from API and load it once when app starts
   useEffect(() => {
     fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=beng&limit=10&api_key=${API_KEY}`)
         .then(res => res.json())
         .then(data => setAllImages(data))
   }, [])
       
-
+  // Function to randomize array elements
   function shuffleCards() {
-    console.log('shuffle ran')
-    console.log(allImages)
     let newArray = allImages;
     let currentIndex = newArray.length;
 
-    // While there remain elements to shuffle...
+    // While there are elements to reorder
     while (currentIndex !== 0) {
   
-      // Pick a remaining element...
+      // Pick a remaining element
       let randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
   
-      // And swap it with the current element.
+      // Swap it with the current element
       [newArray[currentIndex], newArray[randomIndex]] = [
         newArray[randomIndex], newArray[currentIndex]];
     }
@@ -44,8 +43,8 @@ function App() {
     })
   }
 
+  // Keep track of high score
   function storeHighScore() {
-    
     if (clickedCount < highScore) {
       return
     } else {
@@ -54,22 +53,23 @@ function App() {
   }
 
   function handleClick(id) {
-
+    // If same image is clicked set reset array/score
     if (clickedArray.includes(id)) {
       setClickedArray([])
     } else {
+    // Add to array and add 1 to score
       setClickedArray([
         ...clickedArray,
         id
       ])
       storeHighScore()
     }
+
     shuffleCards()
-    console.log('clicked', clickedArray)
   }
 
+  // Load card components based off fetched data
   const cardList = allImages.map((img) => {
-    
     return (
       <Card 
         key={img.id}
@@ -84,10 +84,12 @@ function App() {
   return (
     <div className='app-container'>
       <h1 className='header'>Cat Memory Game</h1>
-      <Scoreboard score={clickedCount} highScore={highScore}/>
+      <Scoreboard 
+        score={clickedCount} 
+        highScore={highScore}
+      />
       <div className="cards-container">{cardList}</div>
-      <h4 className='win-text'>{clickedArray.length === allImages.length && 'Well Done!'}</h4>
-      
+      <h4 className='win-text'>{clickedArray.length === allImages.length && 'Well Done!'}</h4> 
     </div>
   )
 }
