@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import Card from './components/Card'
 import Scoreboard from './components/Scoreboard'
-import apiKey from '../config'
 import './App.css'
 
 function App() {
-  const API_KEY = apiKey()
+  const API_KEY = 'live_F8shDaeIQ22M7Pdeg5C4lRawfLTwbc9iPMA5xY5Tisd6C830T77lGHDeBKDr3gLR'
 
   const [allImages, setAllImages] = useState([])
   const [clickedArray, setClickedArray] = useState([])
