@@ -14,7 +14,7 @@ function App() {
   
   // Fetch images from API and load it once when app starts
   useEffect(() => {
-    fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=beng&limit=30&api_key=${API_KEY}`)
+    fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=beng&limit=10&api_key=${API_KEY}`)
         .then(res => res.json())
         .then(data => setAllImages(data))
   }, [])
